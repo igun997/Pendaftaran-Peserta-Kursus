@@ -8,23 +8,26 @@
       <div class="col-md-12">
         @if($alert_status == 0)
         {!! $alert !!}
-        <form method="post" action="" onsubmit="return false" id="save">
+        <form method="post" action="" onsubmit="return false" id="save" enctype="multipart/form-data">
           <div class="col-md-12">
             <div class="col-md-12">
-              <div class="form-group"><label>Nama Lengkap</label><input class="form-control" type="text"  value="" name="nama_lengkap"></div>
+              <div class="form-group"><label>Nama Lengkap</label><input class="form-control" required type="text"  value="" name="nama_lengkap"></div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group"><label>Foto</label><input class="form-control" required type="file" name="foto"></div>
             </div>
             <input type="text" hidden name="id_user" value="{{session()->get("id_user")}}">
             <div class="col-md-12">
               <div class="form-group">
                 <label>Jenis Kelamin</label>
-                <select class="form-control" name="jk">
+                <select class="form-control" name="jk" required>
                   <option value="laki-laki">Laki - Laki</option>
                   <option value="perempuan">Perempuan</option>
                 </select>
               </div>
             </div>
             <div class="col-md-12">
-              <div class="form-group"><label>Alamat</label><textarea class="form-control" type="text"  value="" name="alamat"></textarea></div>
+              <div class="form-group"><label>Alamat</label><textarea class="form-control" required type="text"  value="" name="alamat"></textarea></div>
             </div>
             <div class="col-md-12">
               <div class="form-group pull-right"><button class="btn btn-success" type="submit">Simpan</button>
@@ -37,6 +40,11 @@
           <div class="col-md-12">
             <div class="col-md-12">
               <div class="form-group"><label>Nama Lengkap</label><input class="form-control" type="text"  value="{{$data_biodata->nama_lengkap}}" disabled name="nama_lengkap"></div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group"><label>Foto</label>
+                <img class="img-responsive" style="width:auto;height:100px" src="{{url('/')}}/{{$data_biodata->foto}}" alt="">
+              </div>
             </div>
             <div class="col-md-12">
               <div class="form-group">

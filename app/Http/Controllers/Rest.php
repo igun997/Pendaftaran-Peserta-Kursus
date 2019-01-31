@@ -4,6 +4,7 @@ namespace SystemFive\Http\Controllers;
 use \SystemFive\CalonModel;
 use \SystemFive\UserModel;
 use Illuminate\Http\Request;
+use Validator;
 use Hash;
 
 class Rest extends Controller
@@ -172,7 +173,15 @@ class Rest extends Controller
       if ($this->isAll($req)) {
         return $this->res(["status"=>0,"msg"=>"No Session Detected","debug"=>$req->session()->all()]);
       }
+      $validator = Validator::make($req->all(), [
+          "foto"=>'mimes:jpeg,bmp,png'
+       ]);
+      if ($validator->fails()) {
+        return $this->res(["status"=>0,"msg"=>"Gagal Simpan Bio Foto Menyalahi Ketentuan"]);
+      }
+      $path = $req->file("foto")->store("public/upload");
       $model = $this->calon;
+      $model->foto = str_replace("public/","storage/",$path);
       $model->id_user = $req->input("id_user");
       $model->nama_lengkap = $req->input("nama_lengkap");
       $model->jk = $req->input("jk");

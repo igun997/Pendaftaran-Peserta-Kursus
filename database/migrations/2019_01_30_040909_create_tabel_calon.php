@@ -17,6 +17,7 @@ class CreateTabelCalon extends Migration
           $table->increments('id_calon');
           $table->unsignedInteger('id_user');
           $table->string('nama_lengkap',100);
+          $table->string('foto',100);
           $table->enum('jk',["laki-laki","perempuan"]);
           $table->longText('alamat');
           $table->timestamps();

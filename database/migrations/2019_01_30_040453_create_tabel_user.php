@@ -15,12 +15,12 @@ class CreateTabelUser extends Migration
     {
         Schema::create('tabel_user', function (Blueprint $table) {
           $table->increments('id_user');
-          $table->string('username',10);
-          $table->string('email',100);
+          $table->string('username',10)->unique();
+          $table->string('email',100)->unique();
           $table->string('password',100);
           $table->enum('level',["admin","peserta"]);
           $table->timestamps();
-        
+
         });
     }
 
