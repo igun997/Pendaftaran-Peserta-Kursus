@@ -20,6 +20,7 @@ class CreateTabelUser extends Migration
           $table->string('password',100);
           $table->enum('level',["admin","peserta"]);
           $table->timestamps();
+        
         });
     }
 

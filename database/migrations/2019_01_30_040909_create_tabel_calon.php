@@ -20,7 +20,7 @@ class CreateTabelCalon extends Migration
           $table->enum('jk',["laki-laki","perempuan"]);
           $table->longText('alamat');
           $table->timestamps();
-          $table->foreign('id_user')->references('id_user')->on('tabel_user');
+          $table->foreign('id_user')->references('id_user')->on('tabel_user')->onDelete('cascade');
         });
     }
 

@@ -85,6 +85,29 @@ class Rest extends Controller
       }
     }
     //Admin API
+    public function datacalon(Request $req)
+    {
+      if ($this->isAdmin($req)) {
+        return $this->res(["status"=>0,"msg"=>"No Session Detected","debug"=>$req->session()->all()]);
+      }
+      $getdata = \SystemFive\UserModel::where(["level"=>"peserta"])->leftjoin("tabel_calon","tabel_user.id_user","=","tabel_calon.id_user")->select("tabel_user.*","tabel_calon.id_calon as status_biodata")->get();
+      $datatable = $this->datatablesConvert($getdata,"id_user,username,email,status_biodata,created_at");
+      return $this->res($datatable);
+    }
+    public function detildatacalon(Request $req,$id)
+    {
+      if ($this->isAdmin($req)) {
+        return $this->res(["status"=>0,"msg"=>"No Session Detected","debug"=>$req->session()->all()]);
+      }
+      $getdata = \SystemFive\CalonModel::where(["id_user"=>$id])->get();
+      $data = [];
+      if (count($getdata) > 0) {
+        $data = $getdata[0];
+        return $this->res(["status"=>1,"msg"=>"Data Ketemu ~ ","data"=>$data]);
+      }else {
+        return $this->res(["status"=>0,"msg"=>"Kagak Ada Datanya Bro ~ "]);
+      }
+    }
     public function userinsert(Request $req)
     {
       if ($this->isAdmin($req)) {

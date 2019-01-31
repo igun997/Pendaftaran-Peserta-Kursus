@@ -41,6 +41,8 @@ Route::post('/api/login','Rest@signin');
 Route::post('/api/register','Rest@register');
 // API Admin
 Route::get('/api/userread','Rest@userread');
+Route::get('/api/datacalon','Rest@datacalon');
+Route::get('/api/detildatacalon/{id}','Rest@detildatacalon');
 Route::post('/api/userinsert','Rest@userinsert');
 Route::post('/api/userupdate','Rest@userupdate');
 Route::get('/api/userdelete/{id}','Rest@userdelete');
