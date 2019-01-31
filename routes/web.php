@@ -14,6 +14,19 @@
 Route::get('/','Landing@home');
 Route::get('/masuk','Landing@login');
 Route::get('/daftar','Landing@register');
+//Calon Route
+Route::get('/calon','Calon@home');
+Route::get('/calon/isibio','Calon@isibio');
+//Admin Route
+Route::get('/admin','Admin@home');
+Route::get('/admin/calon','Admin@calon');
+//Public Route
+Route::get('/logout',function(){
+  session()->flush();
+  return redirect('/');
+});
+
+//END Menu Route
 //API Route
 Route::get('/api/createsession',function(){
   session(["type"=>"admin"]);

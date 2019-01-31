@@ -44,15 +44,15 @@ class Rest extends Controller
     }
     private function isAdmin(Request $res)
     {
-      return ($res->session()->get('type') != "admin");
+      return ($res->session()->get('level') != "admin");
     }
     public function isAll(Request $res)
     {
-      return ($res->session()->get('type') != null);
+      return ($res->session()->get('level') == null);
     }
     private function isPeserta(Request $res)
     {
-      return ($res->session()->get('type') != "peserta");
+      return ($res->session()->get('level') != "peserta");
     }
     //Public API
     public function signin(Request $req)
@@ -63,7 +63,7 @@ class Rest extends Controller
         $cekHash = Hash::check($req->input("password"),$data[0]["password"]);
         if ($cekHash) {
           session($data[0]);
-          return $this->res(["status"=>1,"msg"=>"Username dan Password Benar","path"=>$data[0]["level"]]);
+          return $this->res(["status"=>1,"msg"=>"Username dan Password Benar","path"=>$data[0]["level"],"session"=>session()->all()]);
         }else {
           return $this->res(["status"=>0,"msg"=>"Password Salah","debug"=>$cekHash]);
         }
@@ -76,6 +76,7 @@ class Rest extends Controller
       $data = $req->all();
       $data["level"] = "peserta";
       $data["password"] = bcrypt($data["password"]);
+      $data["created_at"] = date("Y-m-d H:i:s");
       $ins = \SystemFive\UserModel::insert($data);
       if ($ins) {
         return $this->res(["status"=>1,"msg"=>"Pendaftaran Sukses<br>Silahkan Login Menggunakan Akun Tersebut"]);
@@ -145,10 +146,10 @@ class Rest extends Controller
     }
     public function caloninsert(Request $req)
     {
-      if ($this->isAdmin($req)) {
+      if ($this->isAll($req)) {
         return $this->res(["status"=>0,"msg"=>"No Session Detected","debug"=>$req->session()->all()]);
       }
-      $model = $this->peserta;
+      $model = $this->calon;
       $model->id_user = $req->input("id_user");
       $model->nama_lengkap = $req->input("nama_lengkap");
       $model->jk = $req->input("jk");

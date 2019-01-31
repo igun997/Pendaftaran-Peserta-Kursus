@@ -12,6 +12,13 @@ $(document).ready(function() {
     .done(function(d) {
       if (d.status == 1) {
         toastr.success(d.msg);
+        setTimeout(function () {
+          red = "admin";
+          if (d.path == "peserta") {
+            red = "calon";
+          }
+          location.href = base_url+red;
+        }, 1000);
       }else {
         toastr.error(d.msg);
       }

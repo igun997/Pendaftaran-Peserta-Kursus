@@ -17,6 +17,7 @@ class Kernel extends HttpKernel
         \SystemFive\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \SystemFive\Http\Middleware\TrimStrings::class,
+        \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \SystemFive\Http\Middleware\TrustProxies::class,
     ];
