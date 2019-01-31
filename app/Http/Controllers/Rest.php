@@ -177,7 +177,7 @@ class Rest extends Controller
           "foto"=>'mimes:jpeg,bmp,png'
        ]);
       if ($validator->fails()) {
-        return $this->res(["status"=>0,"msg"=>"Gagal Simpan Bio Foto Menyalahi Ketentuan"]);
+        return $this->res(["status"=>0,"msg"=>"Gagal Simpan Biodata Foto Menyalahi Ketentuan"]);
       }
       $path = $req->file("foto")->store("public/upload");
       $model = $this->calon;
