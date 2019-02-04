@@ -8,6 +8,9 @@ $(document).ready(function() {
       if (d[3] == null) {
         status = "Belum Isi";
       }
+      if(d[4] != null){
+       $("td",r).eq(4).html(d[4].date);
+      }
       $("td",r).eq(3).html(status);
     }
   });
