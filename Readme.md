@@ -8,6 +8,8 @@ lalu jalankan `` composer install ``
 
 
 ## Import DB
+Import DB Menggunakan Migration Tools 
+Jalankan Migrate `` php artisan migrate``
 Jalankan seeder `` php artisan db:seed ``
 
 ## User List
